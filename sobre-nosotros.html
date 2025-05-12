@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nosotros - Docktease</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f9fc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Estilos para el encabezado moderno */
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+
+    .menu-navegacion ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-navegacion a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 5px 0;
+      position: relative;
+    }
+
+    .menu-navegacion a:hover {
+      color: #0066cc;
+    }
+
+    .menu-navegacion a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #0066cc;
+      transition: width 0.3s ease;
+    }
+
+    .menu-navegacion a:hover::after {
+      width: 100%;
+    }
+
+    /* Contenido principal */
+    .contenedor-principal {
+      max-width: 1200px;
+      margin: 120px auto 50px;
+      padding: 0 20px;
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/api/placeholder/1200/500');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.7);
+      z-index: -1;
+    }
+
+    .hero-content {
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+      z-index: 1;
+    }
+
+    .hero-titulo {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitulo {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Sección de quiénes somos */
+    .quienes-somos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .quienes-somos-texto {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .seccion-titulo {
+      color: #161f70;
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .seccion-titulo::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: #0066cc;
+    }
+
+    .quienes-somos-imagen {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      height: 400px;
+    }
+
+    .quienes-somos-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Nuestra historia */
+    .nuestra-historia {
+      margin-bottom: 60px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background-color: #e1e4e8;
+      transform: translateX(-50%);
+    }
+
+    .evento {
+      display: flex;
+      margin-bottom: 40px;
+    }
+
+    .evento-contenido {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      width: calc(50% - 30px);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .evento-contenido:hover {
+      transform: translateY(-5px);
+    }
+
+    .evento-año {
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 60px;
+      background-color: #161f70;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .evento:nth-child(odd) .evento-contenido {
+      margin-right: auto;
+    }
+
+    .evento:nth-child(even) .evento-contenido {
+      margin-left: auto;
+    }
+
+    .evento:nth-child(odd) .evento-año {
+      right: -30px;
+    }
+
+    .evento:nth-child(even) .evento-año {
+      left: -30px;
+    }
+
+    .evento-titulo {
+      color: #161f70;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    /* Nuestro equipo */
+    .nuestro-equipo {
+      margin-bottom: 60px;
+    }
+
+    .equipo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .miembro {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .miembro:hover {
+      transform: translateY(-5px);
+    }
+
+    .miembro-foto {
+      height: 280px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .miembro-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .miembro-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .miembro-nombre {
+      margin-top: 0;
+      margin-bottom: 5px;
+      color: #161f70;
+    }
+
+    .miembro-cargo {
+      color: #0066cc;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    /* Nuestros valores */
+    .nuestros-valores {
+      margin-bottom: 60px;
+    }
+
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .valor {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .valor:hover {
+      transform: translateY(-5px);
+    }
+
+    .valor-icono {
+      width: 70px;
+      height: 70px;
+      background-color: #f0f7ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: #161f70;
+    }
+
+    .valor-titulo {
+      color: #161f70;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    /* Testimonios */
+    .testimonios {
+      margin-bottom: 60px;
+      background-color: #f0f7ff;
+      padding: 60px 40px;
+      border-radius: 12px;
+    }
+
+    .testimonios-titulo {
+      color: #161f70;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonio {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .testimonio::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 5rem;
+      line-height: 0;
+      color: #e1e4e8;
+      font-family: Georgia, serif;
+    }
+
+    .testimonio-texto {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .testimonio-autor {
+      display: flex;
+      align-items: center;
+    }
+
+    .autor-foto {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+      overflow: hidden;
+    }
+
+    .autor-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .autor-info h4 {
+      margin: 0;
+      color: #161f70;
+    }
+
+    .autor-info p {
+      margin: 5px 0 0;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #161f70;
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer-contenido {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-columna h3 {
+      color: white;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .footer-columna p {
+      margin: 0 0 10px;
+      color: #ccd7f0;
+    }
+
+    .footer-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-nav li {
+      margin-bottom: 10px;
+    }
+
+    .footer-nav a {
+      color: #ccd7f0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: white;
+    }
+
+    .contacto-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contacto-icono {
+      margin-right: 15px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .redes-sociales {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .red-social {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .red-social:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .red-social img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #ccd7f0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      color: #ccd7f0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .menu-navegacion {
+        margin-top: 15px;
+        width: 100%;
+      }
+      
+      .menu-navegacion ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .hero {
+        height: 400px;
+      }
+
+      .hero-titulo {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitulo {
+        font-size: 1.2rem;
+      }
+
+      .timeline::before {
+        left: 30px;
+      }
+
+      .evento-contenido {
+        width: calc(100% - 60px);
+        margin-left: 60px !important;
+      }
+
+      .evento-año {
+        left: 0 !important;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .footer-bottom-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado fijo en la parte superior -->
+  <header>
+    <img src="https://static.wikigta.org/nl/images/6/65/Docktease_logo.png" alt="Docktease" class="logo">
+    <!-- Menú de navegación -->
+    <nav class="menu-navegacion">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="publicar.html">Publicar</a></li>
+        <li><a href="comprar.html">Comprar</a></li>
+        <li><a href="varcos.html">Barcos de Pasto</a></li>
+        <li><a href="estadisticas.html">Estadísticas</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="contenedor-principal">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-titulo">Navegando Juntos Desde 2010</h1>
+        <p class="hero-subtitulo">Somos pasión por los mares, experiencia en navegación y compromiso con la excelencia en cada transacción</p>
+      </div>
+    </section>
+
+    <!-- Quiénes somos -->
+    <section class="quienes-somos">
+      <div class="quienes-somos-texto">
+        <h2 class="seccion-titulo">Quiénes Somos</h2>
+        <p>En Docktease, somos el eslabón que conecta a entusiastas, profesionales y soñadores con las embarcaciones que transformarán sus experiencias marítimas. Nacida de la pasión por la navegación y la tecnología, nuestra plataforma redefine la forma en que se compran y venden barcos en España y el mundo.</p>
+        <p>Con más de 15.000 embarcaciones vendidas y una comunidad que supera los 50.000 usuarios, nos hemos consolidado como líderes en el mercado de compraventa naval, combinando el conocimiento especializado con la innovación digital para ofrecer una experiencia transparente, segura y eficiente.</p>
+        <p>Nuestro equipo está formado por navegantes apasionados y expertos en tecnología que entienden tanto las necesidades del mar como las del mercado digital, creando un puente entre tradición e innovación.</p>
+      </div>
+      <div class="quienes-somos-imagen">
+        <img src="https://pbs.twimg.com/media/FpcVafMaUAE3tRv.jpg" alt="Equipo Docktease">
+      </div>
+    </section>
+
+    <!-- Nuestra historia -->
+    <section class="nuestra-historia">
+      <h2 class="seccion-titulo">Nuestra Historia</h2>
+      <p>Un recorrido por los principales hitos que han marcado nuestro crecimiento y evolución a lo largo de los años.</p>
+      
+      <div class="timeline">
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="evento-año">2010</div>
+            <h3 class="evento-titulo">El nacimiento de Docktease</h3>
+            <p>Carlos Martínez y Elena Ruiz, dos apasionados de la navegación, fundan Docktease como una pequeña plataforma local para conectar a vendedores y compradores de embarcaciones en la costa mediterránea española.</p>
+          </div>
+        </div>
+        
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="evento-año">2013</div>
+            <h3 class="evento-titulo">Expansión nacional</h3>
+            <p>Tras el éxito inicial, Docktease amplía sus operaciones a toda España, incorporando servicios de tasación y certificación de embarcaciones, lo que incrementa la confianza de los usuarios.</p>
+          </div>
+        </div>
+        
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="evento-año">2016</div>
+            <h3 class="evento-titulo">Revolución digital</h3>
+            <p>Lanzamos nuestra primera aplicación móvil y renovamos completamente la plataforma web, implementando tecnologías avanzadas de búsqueda y visualización 3D de embarcaciones.</p>
+          </div>
+        </div>
+        
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="evento-año">2019</div>
+            <h3 class="evento-titulo">Internacionalización</h3>
+            <p>Docktease cruza fronteras y comienza operaciones en Portugal, Francia e Italia, adaptando su modelo a las particularidades de cada mercado y estableciendo alianzas estratégicas con astilleros europeos.</p>
+          </div>
+        </div>
+        
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="evento-año">2022</div>
+            <h3 class="evento-titulo">Innovación continua</h3>
+            <p>Implementamos servicios pioneros como la financiación integrada, seguros personalizados y el revolucionario sistema de visitas virtuales que permite explorar cada rincón de las embarcaciones sin salir de casa.</p>
+          </div>
+        </div>
+        
+        <div class="evento">
+          <div class="evento-contenido">
+            <div class="evento-año">2025</div>
+            <h3 class="evento-titulo">Liderazgo consolidado</h3>
+            <p>Hoy somos la plataforma líder en el mercado europeo, con presencia en 12 países y un catálogo que supera las 25.000 embarcaciones. Nuestro compromiso con la innovación, la calidad y la satisfacción del cliente sigue siendo el motor que impulsa nuestro crecimiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nuestro equipo -->
+    <section class="nuestro-equipo">
+      <h2 class="seccion-titulo">Nuestro Equipo</h2>
+      <p>Detrás de Docktease hay un equipo apasionado de profesionales del mar y la tecnología, dedicados a ofrecer la mejor experiencia en la compraventa de embarcaciones.</p>
+      
+      <div class="equipo-grid">
+        <div class="miembro">
+          <div class="miembro-foto">
+            <img src="https://static.wikia.nocookie.net/disney/images/7/7f/Quasimodo.jpeg/revision/latest?cb=20190301095734" alt="Basy">
+          </div>
+          <div class="miembro-info">
+            <h3 class="miembro-nombre">Basy</h3>
+            <p class="miembro-cargo">Co-fundador</p>
+            <p>Capitán de yate con más de 25 años de experiencia navegando por todo el mundo. Su visión ha sido el timón que ha guiado Docktease desde sus inicios.</p>
+          </div>
+        </div>
+        
+        <div class="miembro">
+          <div class="miembro-foto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Lightmatter_ibex.jpg" alt="Julian Ledesma">
+          </div>
+          <div class="miembro-info">
+            <h3 class="miembro-nombre">Julian Ledesma</h3>
+            <p class="miembro-cargo">CEO & Fundador</p>
+            <p>Ingeniero naval y emprendedor en serie. Su conocimiento técnico y visión de negocio han sido fundamentales para el crecimiento de la plataforma.</p>
+          </div>
+        </div>
+        
+        <div class="miembro">
+          <div class="miembro-foto">
+            <img src="https://images.steamusercontent.com/ugc/38945545051111963/5297C7825461D0A6AE31D286500AE41D665CE94C/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Tito Calderon">
+          </div>
+          <div class="miembro-info">
+            <h3 class="miembro-nombre">Tito Calderon</h3>
+            <p class="miembro-cargo">Director Técnico</p>
+            <p>Responsable de toda la arquitectura tecnológica que hace posible la experiencia Docktease, combinando innovación con usabilidad.</p>
+          </div>
+        </div>
+        
+        <div class="miembro">
+          <div class="miembro-foto">
+            <img src="https://www.clarin.com/img/2019/12/02/zy9zPYB6_720x0__1.jpg" alt="Lamine Yabien">
+          </div>
+          <div class="miembro-info">
+            <h3 class="miembro-nombre">Lamine Yabien</h3>
+            <p class="miembro-cargo">Director de Experiencia</p>
+            <p>Experto en UX/UI y apasionado navegante, trabaja para que cada interacción con nuestra plataforma sea intuitiva y satisfactoria.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nuestros valores -->
+    <section class="nuestros-valores">
+      <h2 class="seccion-titulo">Nuestros Valores</h2>
+      <p>Los principios que guían cada una de nuestras acciones y decisiones.</p>
+      
+      <div class="valores-grid">
+        <div class="valor">
+          <div class="valor-icono">🌊</div>
+          <h3 class="valor-titulo">Pasión por el Mar</h3>
+          <p>No solo vendemos barcos, somos navegantes. Entendemos la conexión especial entre las personas y el mar, y nos esforzamos por honrarla en cada transacción.</p>
+        </div>
+        
+        <div class="valor">
+          <div class="valor-icono">🔍</div>
+          <h3 class="valor-titulo">Transparencia</h3>
+          <p>Creemos en la información clara y completa. Cada embarcación en nuestra plataforma cuenta con documentación verificada y detalles exhaustivos.</p>
+        </div>
+        
+        <div class="valor">
+          <div class="valor-icono">🛡️</div>
+          <h3 class="valor-titulo">Seguridad</h3>
+          <p>Protegemos cada transacción con sistemas avanzados de verificación y pagos seguros, creando un entorno de confianza para compradores y vendedores.</p>
+        </div>
+        
+        <div class="valor">
+          <div class="valor-icono">💡</div>
+          <h3 class="valor-titulo">Innovación</h3>
+          <p>Constantemente exploramos nuevas tecnologías y enfoques para mejorar la experiencia de compraventa de embarcaciones.</p>
+        </div>
+        
+        <div class="valor">
+          <div class="valor-icono">🤝</div>
+          <h3 class="valor-titulo">Comunidad</h3>
+          <p>Fomentamos una vibrante comunidad de amantes del mar, facilitando el intercambio de conocimientos y experiencias más allá de las transacciones.</p>
+        </div>
+        
+        <div class="valor">
+          <div class="valor-icono">🌱</div>
+          <h3 class="valor-titulo">Sostenibilidad</h3>
+          <p>Promovemos prácticas náuticas respetuosas con el medio ambiente y apoyamos iniciativas de conservación marina.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonios">
+      <h2 class="testimonios-titulo">Lo Que Dicen Nuestros Clientes</h2>
+      
+      <div class="testimonios-grid">
+        <div class="testimonio">
+          <p class="testimonio-texto">Vendí mi velero en menos de tres semanas gracias a Docktease. El proceso fue increíblemente sencillo y el equipo estuvo pendiente de cada detalle. Sin duda, la mejor plataforma para vender embarcaciones.</p>
+          <div class="testimonio-autor">
+            <div class="autor-foto">
+              <img src="/api/placeholder/100/100" alt="Javier González">
+            </div>
+            <div class="autor-info">
+              <h4>Javier González</h4>
+              <p>Vendedor de velero Jeanneau</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonio">
+          <p class="testimonio-texto">Como comprador primerizo, tenía muchas dudas. El asesoramiento personalizado de Docktease fue clave para encontrar exactamente lo que buscaba. Su función de comparación de modelos me ayudó a tomar la mejor decisión.</p>
+          <div class="testimonio-autor">
+            <div class="autor-foto">
+              <img src="/api/placeholder/100/100" alt="María Fernández">
+            </div>
+            <div class="autor-info">
+              <h4>María Fernández</h4>
+              <p>Compradora de lancha Bayliner</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonio">
+          <p class="testimonio-texto">La visita virtual 3D me permitió explorar el yate desde mi oficina en Madrid, ahorrándome varios viajes. Cuando finalmente lo vi en persona, era exactamente como lo había visualizado. ¡Increíble tecnología!</p>
+          <div class="testimonio-autor">
+            <div class="autor-foto">
+              <img src="/api/placeholder/100/100" alt="Antonio Vega">
+            </div>
+            <div class="autor-info">
+              <h4>Antonio Vega</h4>
+              <p>Comprador de yate Princess</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-contenido">
+      <div class="footer-grid">
+        <div class="footer-columna">
+          <img src="https://static.wikigta.org/nl

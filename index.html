@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BARCOS</title>
+  <link rel="stylesheet" href="estilo.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+    }
+    
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+    
+    .menu-navegacion ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    .menu-navegacion a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 5px 0;
+      position: relative;
+    }
+    
+    .menu-navegacion a:hover {
+      color: #0066cc;
+    }
+    
+    .menu-navegacion a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #0066cc;
+      transition: width 0.3s ease;
+    }
+    
+    .menu-navegacion a:hover::after {
+      width: 100%;
+    }
+    
+    main {
+      margin-top: 100px;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin: 30px 0;
+      color: #333;
+      font-size: 28px;
+      padding: 0 20px;
+    }
+    
+    #card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .menu-navegacion {
+        margin-top: 15px;
+        width: 100%;
+      }
+      
+      .menu-navegacion ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado fijo en la parte superior -->
+  <header>
+    <img src="https://static.wikigta.org/nl/images/6/65/Docktease_logo.png" alt="Docktease" class="logo">
+    <!-- Menú de navegación -->
+    <nav class="menu-navegacion">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="publicar.html">Publicar</a></li>
+        <li><a href="comprar.html">Comprar</a></li>
+        <li><a href="varcos.html">Barcos de Pasto</a></li>
+        <li><a href="estadisticas.html">Estadísticas</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>ESTA ES UNA SUPER EMPRESA DE VENTA DE BARCOS PARA AQUELLOS QUE LOS NECESITAN</h1>
+    
+    <!-- Contenedor donde se agregarán las cartas dinámicamente -->
+    <div id="card-container"></div>
+  </main>
+  
+  <!-- Enlace para cargar el archivo JavaScript -->
+  <script src="index2.js"></script>
+  
+</body>
+</html>

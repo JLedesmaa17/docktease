@@ -1,0 +1,129 @@
+/* Restablecer márgenes y padding de todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general para el body */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("https://www.publicdomainpictures.net/pictures/300000/nahled/seabed-155896303267m.jpg");  /* Imagen de fondo */
+    background-size: cover;  /* Hacer que la imagen cubra toda la pantalla */
+    background-position: center;  /* Centra la imagen */
+    background-attachment: fixed;  /* Fija la imagen mientras se desplaza el contenido */
+    color: #fff;  /* Texto blanco para buen contraste */
+    display: flex;
+    flex-wrap: wrap;  /* Para que las cartas se acomoden en varias filas si es necesario */
+    justify-content: center;  /* Centra las cartas horizontalmente */
+    align-items: flex-start;  /* Alinea las cartas en la parte superior */
+    gap: 20px;  /* Espacio entre las cartas */
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;  /* Para asegurar que todo se vea bien incluso en pantallas pequeñas */
+}
+
+/* Estilo del encabezado */
+header {
+    width: 100%;  /* Ancho completo */
+    background-color: rgba(22, 31, 112, 0.747);  /* Fondo negro semi-transparente */
+    padding: 20px 0;  /* Espacio superior e inferior */
+    text-align: center;  /* Centrar el contenido */
+    position: fixed;  /* Fijo en la parte superior */
+    top: 0;
+    left: 0;
+    z-index: 100;  /* Asegura que quede encima de todo */
+}
+
+header .logo {
+    width: 200px;  /* Tamaño de la imagen del logo */
+    height: auto;  /* Mantiene las proporciones */
+}
+
+/* Estilo para el texto del h1 */
+h1 {
+    color: #fff;  /* Texto blanco */
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 120px;  /* Agregar margen superior para evitar que el texto quede tapado por el encabezado */
+    font-weight: bold;
+    
+    /* Fondo detrás del texto para mejorar la legibilidad */
+    background-color: rgba(0, 0, 0, 0.5);  /* Fondo negro con opacidad */
+    padding: 20px;  /* Espaciado alrededor del texto */
+    border-radius: 10px;  /* Bordes redondeados */
+    max-width: 90%;  /* Asegura que el texto no se estire demasiado */
+    margin-left: auto;  /* Centra el bloque de texto */
+    margin-right: auto;  /* Centra el bloque de texto */
+}
+
+
+
+
+
+
+
+
+
+/* Estilo de las cartas */
+.card {
+    background-color: white;
+    width: 300px;  /* Tamaño fijo para cada carta */
+    border-radius: 10px;  /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease;  /* Transición suave al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse sobre la carta */
+.card:hover {
+    transform: scale(1.05);  /* Aumenta el tamaño de la carta */
+}
+
+/* Estilo de la imagen dentro de la carta */
+.card img {
+    width: 100%;  /* La imagen ocupa todo el ancho de la carta */
+    height: auto;  /* Mantiene las proporciones */
+    border-radius: 10px;  /* Bordes redondeados */
+    margin-bottom: 15px;  /* Espacio debajo de la imagen */
+}
+
+/* Estilo para el título (nombre del barco) */
+.card h2 {
+    font-size: 1.6rem;
+    color: #333;  /* Color oscuro para el texto */
+    margin-bottom: 10px;
+}
+
+/* Estilo para los párrafos (precio y vendedor) */
+.card p {
+    font-size: 1.2rem;
+    color: #666;  /* Color gris para los textos secundarios */
+    margin: 5px 0;
+}
+
+/* Estilo específico para el precio (destacado) */
+.card .price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #f39c12;  /* Naranja para el precio */
+}
+
+/* Estilo para el vendedor (con un color más oscuro) */
+.card .seller {
+    font-size: 1.1rem;
+    color: #2c3e50;  /* Gris oscuro */
+}
+
+/* Estilo para los contenedores de cartas */
+#card-container {
+    display: flex;
+    flex-wrap: wrap;  /* Para que las cartas se acomoden en varias filas */
+    justify-content: center;  /* Centra las cartas en el contenedor */
+    gap: 20px;  /* Espacio entre las cartas */
+    margin-top: 100px;  /* Espacio para que no se superpongan con el encabezado */
+}
+
+  
+  

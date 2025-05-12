@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprar Barcos - Docktease</title>
+  <link rel="stylesheet" href="estilo.css">
+  <style>
+    /* Estilos para el encabezado moderno */
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 30px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+
+    .menu-navegacion ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu-navegacion a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 5px 0;
+      position: relative;
+    }
+
+    .menu-navegacion a:hover {
+      color: #0066cc;
+    }
+
+    .menu-navegacion a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #0066cc;
+      transition: width 0.3s ease;
+    }
+
+    .menu-navegacion a:hover::after {
+      width: 100%;
+    }
+
+    /* Estilos responsivos para el encabezado */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .menu-navegacion {
+        margin-top: 15px;
+        width: 100%;
+      }
+      
+      .menu-navegacion ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+    }
+    
+    /* Estilos específicos para la página de compra */
+    .filtros {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 100px auto 30px;  /* Ajustado para el nuevo encabezado */
+      max-width: 1200px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .filtro-grupo {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .filtros label {
+      color: #333;
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    .filtros select, .filtros input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .boton-filtrar {
+      background-color: #161f70;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .boton-filtrar:hover {
+      background-color: #0b1259;
+    }
+    
+    #resultados-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+    /* Modificar las cards para la página de compra */
+    .card {
+      position: relative;
+    }
+    
+    .card .boton-comprar {
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .card .boton-comprar:hover {
+      background-color: #e67e22;
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado fijo en la parte superior -->
+  <header>
+    <img src="https://static.wikigta.org/nl/images/6/65/Docktease_logo.png" alt="Docktease" class="logo">
+    <!-- Menú de navegación -->
+    <nav class="menu-navegacion">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="publicar.html">Publicar</a></li>
+        <li><a href="comprar.html">Comprar</a></li>
+        <li><a href="varcos.html">Barcos de Pasto</a></li>
+        <li><a href="estadisticas.html">Estadísticas</a></li>
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Filtros de búsqueda -->
+  <div class="filtros">
+    <div class="filtro-grupo">
+      <label for="tipo-barco">Tipo de Barco:</label>
+      <select id="tipo-barco">
+        <option value="todos">Todos los tipos</option>
+        <option value="yate">Yate</option>
+        <option value="velero">Velero</option>
+        <option value="lancha">Lancha</option>
+        <option value="moto-acuatica">Moto Acuática</option>
+        <option value="barco-pasto">Barco de Pasto</option>
+      </select>
+    </div>
+    
+    <div class="filtro-grupo">
+      <label for="precio-min">Precio Mínimo:</label>
+      <input type="number" id="precio-min" placeholder="$0">
+    </div>
+    
+    <div class="filtro-grupo">
+      <label for="precio-max">Precio Máximo:</label>
+      <input type="number" id="precio-max" placeholder="$1,000,000">
+    </div>
+    
+    <div class="filtro-grupo">
+      <label for="ordenar">Ordenar por:</label>
+      <select id="ordenar">
+        <option value="precio-asc">Precio: Menor a Mayor</option>
+        <option value="precio-desc">Precio: Mayor a Menor</option>
+        <option value="nombre-asc">Nombre: A-Z</option>
+        <option value="nombre-desc">Nombre: Z-A</option>
+      </select>
+    </div>
+    
+    <button class="boton-filtrar" onclick="filtrarBarcos()">Filtrar Resultados</button>
+  </div>
+  
+  <!-- Contenedor para los resultados -->
+  <div id="resultados-container"></div>
+  
+  <script>
+    // Datos de muestra para los barcos (normalmente vendrían de una base de datos)
+    const catalogoBarcos = [
+      {
+        nombre: "Seashark",
+        tipo: "moto-acuatica",
+        imagen: "https://staticg.sportskeeda.com/editor/2023/05/2bcdc-16836188218257-1920.jpg?w=640",
+        precio: 50000,
+        precioFormateado: "$50,000",
+        vendedor: "Moyano",
+        descripcion: "Moto acuática de gran potencia y estabilidad."
+      },
+      {
+        nombre: "Tropic",
+        tipo: "lancha",
+        imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZVE_fGLerBu-6Ho3c8MFeyv1iqe9KhMgeiK-fIAcK_dPWSgc0VCU7QnIoh_feKh9z308&usqp=CAU",
+        precio: 45000,
+        precioFormateado: "$45,000",
+        vendedor: "Moyano",
+        descripcion: "Lancha deportiva ideal para paseos cortos."
+      },
+      {
+        nombre: "Dinghy",
+        tipo: "lancha",
+        imagen: "https://gtacars.net/images/0106a70bfb24aa21faba433a1d9efd32",
+        precio: 30000,
+        precioFormateado: "$30,000",
+        vendedor: "Moyano",
+        descripcion: "Lancha pequeña perfecta para pesca."
+      },
+      {
+        nombre: "Suntrap",
+        tipo: "lancha",
+        imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbTUznlggQHgWqns5qghXlwwUI_-wokKmdTj_kREBgSIvUDOyDwGD3G2ZqPqYcJZcUxuU&usqp=CAU",
+        precio: 40000,
+        precioFormateado: "$40,000",
+        vendedor: "Moyano",
+        descripcion: "Lancha con amplio espacio para tomar el sol."
+      },
+      {
+        nombre: "Squalo",
+        tipo: "lancha",
+        imagen: "https://staticg.sportskeeda.com/editor/2023/05/195a0-16837875144881-1920.jpg?w=640",
+        precio: 60000,
+        precioFormateado: "$60,000",
+        vendedor: "Moyano",
+        descripcion: "Lancha deportiva de alta velocidad."
+      },
+      {
+        nombre: "Marquis",
+        tipo: "yate",
+        imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPV4xO2BkE0QcS20w-ihfwykqOMv47FmyBhkSHbw8zHU6zmRaVxLnxRW2WiylAP7gd3sY&usqp=CAU",
+        precio: 90000,
+        precioFormateado: "$90,000",
+        vendedor: "Moyano",
+        descripcion: "Yate de lujo para navegación y eventos."
+      },
+      {
+        nombre: "Galaxy Super Yacht",
+        tipo: "yate",
+        imagen: "https://preview.redd.it/ii7oaxi95zmc1.jpeg?width=640&crop=smart&auto=webp&s=d280c009eff5559b4ed674e3f8ec04abf9141e69",
+        precio: 500000,
+        precioFormateado: "$500,000",
+        vendedor: "Moyano",
+        descripcion: "Super yate de lujo con todas las comodidades."
+      }
+    ];
+    
+    // Función para mostrar los barcos en el contenedor
+    function mostrarBarcos(barcos) {
+      const contenedor = document.getElementById('resultados-container');
+      contenedor.innerHTML = '';
+      
+      if (barcos.length === 0) {
+        contenedor.innerHTML = '<h2 style="color: white; background-color: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; text-align: center;">No se encontraron barcos que coincidan con tus criterios de búsqueda.</h2>';
+        return;
+      }
+      
+      barcos.forEach(barco => {
+        // Crear la carta
+        const carta = document.createElement('div');
+        carta.classList.add('card');
+      
+        // Crear la imagen
+        const img = document.createElement('img');
+        img.src = barco.imagen;
+        img.alt = barco.nombre;
+        
+        // Crear el título (nombre del barco)
+        const h2 = document.createElement('h2');
+        h2.textContent = barco.nombre;
+        
+        // Crear el tipo
+        const pTipo = document.createElement('p');
+        pTipo.textContent = `Tipo: ${barco.tipo.charAt(0).toUpperCase() + barco.tipo.slice(1)}`;
+        
+        // Crear el precio
+        const pPrecio = document.createElement('p');
+        pPrecio.classList.add('price');
+        pPrecio.textContent = barco.precioFormateado;
+        
+        // Crear la descripción
+        const pDesc = document.createElement('p');
+        pDesc.textContent = barco.descripcion;
+        
+        // Crear el vendedor
+        const pVendedor = document.createElement('p');
+        pVendedor.classList.add('seller');
+        pVendedor.textContent = `Vendedor: ${barco.vendedor}`;
+        
+        // Crear el botón de compra
+        const botonComprar = document.createElement('button');
+        botonComprar.classList.add('boton-comprar');
+        botonComprar.textContent = 'Comprar Ahora';
+        botonComprar.addEventListener('click', () => {
+          alert(`Has iniciado la compra de ${barco.nombre} por ${barco.precioFormateado}`);
+        });
+      
+        // Añadir todo a la carta
+        carta.appendChild(img);
+        carta.appendChild(h2);
+        carta.appendChild(pTipo);
+        carta.appendChild(pPrecio);
+        carta.appendChild(pDesc);
+        carta.appendChild(pVendedor);
+        carta.appendChild(botonComprar);
+      
+        // Añadir la carta al contenedor
+        contenedor.appendChild(carta);
+      });
+    }
+    
+    // Función para filtrar los barcos según criterios
+    function filtrarBarcos() {
+      const tipoSeleccionado = document.getElementById('tipo-barco').value;
+      const precioMin = parseInt(document.getElementById('precio-min').value) || 0;
+      const precioMax = parseInt(document.getElementById('precio-max').value) || Infinity;
+      const orden = document.getElementById('ordenar').value;
+      
+      // Filtrar por tipo y precio
+      let barcosFiltrados = catalogoBarcos.filter(barco => {
+        const coincideTipo = tipoSeleccionado === 'todos' || barco.tipo === tipoSeleccionado;
+        const coincidePrecio = barco.precio >= precioMin && barco.precio <= precioMax;
+        return coincideTipo && coincidePrecio;
+      });
+      
+      // Ordenar resultados
+      switch(orden) {
+        case 'precio-asc':
+          barcosFiltrados.sort((a, b) => a.precio - b.precio);
+          break;
+        case 'precio-desc':
+          barcosFiltrados.sort((a, b) => b.precio - a.precio);
+          break;
+        case 'nombre-asc':
+          barcosFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+          break;
+        case 'nombre-desc':
+          barcosFiltrados.sort((a, b) => b.nombre.localeCompare(a.nombre));
+          break;
+      }
+      
+      // Mostrar los resultados
+      mostrarBarcos(barcosFiltrados);
+    }
+    
+    // Cargar todos los barcos al inicio
+    window.onload = function() {
+      mostrarBarcos(catalogoBarcos);
+    };
+  </script>
+</body>
+</html>
